@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+
+<html lang="th">
+      
+
+  
+<meta charset="UTF-8">
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UP EVERYDAY</title>
+  <link rel="icon" type="image/png" href="up.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* โค้ด CSS ทั้งหมดของคุณอยู่ตรงนี้ */
+  </style>
+</head>
+<title>UP EVERYDAY - จองโต๊ะ / Table Booking</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{--bg:#0e0f13;--card:#1a1c23;--text:#f5f5f7;--muted:#9aa0ae;--line:#2a2d38;--accent:#ffb020;--on:#16120a;--ok:#2ecc71;--wait:#f5a623;--bad:#ff6b6b;--r:14px}
+
+body{background:var(--bg);color:var(--text);font-family:'Prompt',sans-serif;font-size:14px;line-height:1.5;min-height:100vh;overflow-wrap:anywhere}
+
+#app{max-width:480px;margin:0 auto;padding:16px 14px 60px}
+
+#app.wide{max-width:760px}
+
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+
+.logo{font-weight:700;font-size:18px;letter-spacing:.5px;white-space:nowrap}
+
+.logo b,.logo .ar{color:var(--accent)}
+
+.logo .ar{font-size:12px;margin:0 3px 0 1px;vertical-align:2px}
+
+.tag{font-size:10px;font-weight:600;letter-spacing:1px;padding:2px 8px;border-radius:999px;background:var(--accent);color:var(--on);margin-left:6px}
+
+.right{display:flex;gap:8px;align-items:center}
+
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:12px;cursor:pointer}
+
+.lang span{padding:4px 10px;color:var(--muted)}
+
+.lang span.on{background:var(--accent);color:var(--on);font-weight:600}
+
+.link{background:none;border:0;color:var(--accent);font:600 13px 'Prompt';cursor:pointer;text-decoration:underline}
+
+h2{font-size:18px;margin-bottom:10px}
+
+.nav{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+
+.nav button,.tabs button{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:6px 14px;font:500 13px 'Prompt';cursor:pointer}
+
+.nav button.on,.tabs button.on{background:var(--accent);color:var(--on);border-color:var(--accent);font-weight:600}
+
+.tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:12px;margin-bottom:10px}
+
+.card.off{opacity:.65}
+
+.card.hl{border-color:var(--accent)}
+
+.card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+
+.card-h b{display:block;font-size:16px}
+
+.card-h small,.muted{color:var(--muted);font-size:12px}
+
+.badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid currentColor;text-align:center;white-space:nowrap}
+
+.ok{color:var(--ok)}.wait{color:var(--wait)}.bad{color:var(--bad)}.mut{color:var(--muted)}.acc{color:var(--accent)}
+
+.price{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px;color:var(--muted);margin-bottom:8px}
+
+.price b{font-size:20px;color:var(--text)}
+
+label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px}
+
+input,select{width:100%;background:#13141a;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px;font:400 14px 'Prompt'}
+
+input[type=checkbox]{width:auto;margin-right:8px}
+
+.chk{display:flex;align-items:flex-start;font-size:13px;color:var(--text);margin:10px 0}
+
+.btn{display:block;width:100%;border:0;border-radius:var(--r);padding:11px;font:600 14px 'Prompt';background:var(--accent);color:var(--on);cursor:pointer;margin-top:10px}
+
+.btn.dis,.btn:disabled{background:var(--line);color:var(--muted);cursor:not-allowed}
+
+.btn.gh{background:transparent;border:1px solid var(--line);color:var(--text)}
+
+.btn.rd{background:transparent;border:1px solid var(--bad);color:var(--bad)}
+
+.two{display:flex;gap:8px}.two .btn{flex:1}
+
+.row{display:flex;gap:8px}.row>*{flex:1}
+
+.err{background:rgba(255,107,107,.12);border:1px solid var(--bad);color:var(--bad);padding:8px 12px;border-radius:10px;margin-bottom:10px}
+
+.info{background:rgba(255,176,32,.1);border:1px solid var(--accent);padding:8px 12px;border-radius:10px;margin-bottom:10px;font-size:13px}
+
+.hero{text-align:center;padding:24px 0 14px}.hero .logo{font-size:30px}
+
+.timer{font-weight:600;color:var(--accent)}
+
+.stp{display:flex;align-items:center;gap:8px}
+
+.tt{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:2px;margin-bottom:8px}
+
+.tt th{font-size:11px;font-weight:500;color:var(--muted)}
+
+.tt th:first-child{width:62px;text-align:left;color:var(--text)}
+
+.tt td{height:34px;border:1px solid;border-radius:7px;text-align:center;font-size:12px}
+
+.tt td.f{background:rgba(46,204,113,.16);border-color:rgba(46,204,113,.5);cursor:pointer;color:var(--ok)}
+
+.tt td.p{background:rgba(245,166,35,.16);border-color:rgba(245,166,35,.55);color:var(--wait)}
+
+.tt td.x{background:rgba(255,107,107,.14);border-color:rgba(255,107,107,.45);color:var(--bad)}
+
+.tt td.n{background:var(--card);border-color:var(--line);color:var(--muted)}
+
+.tt td.s{background:var(--accent);border-color:var(--accent);color:var(--on);font-weight:700}
+
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);margin:4px 0 10px}
+
+.scroll{overflow-x:auto}
+
+.trk{list-style:none;margin:10px 0;font-size:13px}
+
+.trk li{display:flex;align-items:center;gap:8px;padding:3px 0;color:var(--muted)}
+
+.trk li:before{content:"";flex:none;width:10px;height:10px;border-radius:50%;border:2px solid var(--line)}
+
+.trk li.done{color:var(--text)}.trk li.done:before{background:var(--ok);border-color:var(--ok)}
+
+.trk li.now{color:var(--accent);font-weight:600}.trk li.now:before{background:var(--accent);border-color:var(--accent)}
+
+.kv{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:13px}
+
+.kv span:first-child{color:var(--muted)}
+
+.qr{text-align:center;padding:10px}
+
+.qr img{width:200px;max-width:100%;background:#fff;border-radius:10px;padding:6px}
+
+.qrph{width:200px;height:200px;margin:0 auto;border:2px dashed var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;padding:12px}
+
+.slip{max-width:100%;max-height:260px;border-radius:10px;border:1px solid var(--line);margin:8px 0}
+
+.ticket{background:#fff;color:#111;border-radius:var(--r);padding:18px;text-align:center}
+
+.ticket .code{font-size:30px;font-weight:700;letter-spacing:2px;margin:6px 0 12px}
+
+.ticket .kv{color:#111;border-color:#ccc;text-align:left}.ticket .kv span:first-child{color:#555}
+
+@media print{body{background:#fff}#app>*:not(.pr){display:none!important}.pr .noprint{display:none!important}#app{max-width:none;padding:0}}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+
+/* ===== ค่าตั้ง (แก้ได้) / SETTINGS ===== */
+
+var CFG={
+
+  shop:'UP EVERYDAY',
+
+  open:17, close:25,            // 17:00 - 01:00 (25 = 01:00 วันถัดไป)
+
+  lead:120,                     // ต้องจองล่วงหน้าอย่างน้อย (นาที)
+
+  adminWait:30, payWait:30,     // นาที
+
+  maxActive:2, days:14, buffer:15,
+
+  reslip:3, reslipWait:15,
+
+  promptpay:'',                 // ใส่เบอร์พร้อมเพย์/เลขบัตร เช่น 0812345678
+
+  terms:'',                     // ข้อความเงื่อนไขท้ายใบ
+
+  tables:[{id:'T1',name:'โต๊ะ 1',en:'Table 1',cap:2,rate:100},
+
+          {id:'T2',name:'โต๊ะ 2',en:'Table 2',cap:4,rate:180},
+
+          {id:'VIP',name:'โต๊ะ VIP',en:'VIP Table',cap:8,rate:500}],
+
+  pkgs:[1,2,3]
+
+};
+
+var T={th:{
+
+ login:'เข้าสู่ระบบ',register:'สมัครสมาชิก',logout:'ออก',user:'ชื่อผู้ใช้',pass:'รหัสผ่าน',pass2:'ยืนยันรหัสผ่าน',dname:'ชื่อที่แสดง',email:'อีเมล',
+
+ noacc:'ยังไม่มีบัญชี?',haveacc:'มีบัญชีแล้ว?',age:'ฉันอายุ 20 ปีขึ้นไป',pdpa:'ยอมรับการเก็บข้อมูลส่วนบุคคล (PDPA)',
+
+ demo:'โหมดตัวอย่าง: เก็บข้อมูลในเบราว์เซอร์นี้ (Admin: admin / admin1234)',
+
+ e_login:'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',e_user:'ชื่อผู้ใช้ใช้ได้เฉพาะ a-z 0-9 _ . - (3-20 ตัว)',e_pass:'รหัสผ่านอย่างน้อย 6 ตัว',e_match:'รหัสผ่านไม่ตรงกัน',e_dup:'ชื่อผู้ใช้นี้ถูกใช้แล้ว',e_chk:'ต้องติ๊กยืนยันอายุและ PDPA',e_mail:'อีเมลไม่ถูกต้อง',
+
+ book:'จองโต๊ะ',mine:'การจองของฉัน',hello:'สวัสดี',date:'วันที่',pkg:'แพ็กเกจ',hr:'ชม.',start:'เวลาเริ่ม',cards:'การ์ด',grid:'ตารางเวลา',
+
+ seats:'ที่นั่ง',guests:'จำนวนคน',max:'สูงสุด',select:'เลือกโต๊ะนี้',free:'ว่าง',pend:'รอยืนยัน',full:'ไม่ว่าง',na:'เลือกไม่ได้',
+
+ lgF:'ว่าง',lgP:'รอยืนยัน',lgX:'ไม่ว่าง',lgN:'จองไม่ได้ (เร็วเกินไป/เลยเวลาปิด)',tapHint:'แตะช่อง "ว่าง" เพื่อเลือกโต๊ะและเวลาเริ่ม',
+
+ noslot:'เวลานี้จองไม่ได้ (ต้องจองล่วงหน้าอย่างน้อย {m} นาที และต้องจบก่อนปิดร้าน)',openinfo:'เปิด {o} - {c}',
+
+ confirm:'ยืนยันคำขอจอง',back:'ย้อนกลับ',send:'ส่งคำขอจอง',table:'โต๊ะ',time:'เวลา',amount:'ยอดชำระ',baht:'บาท',people:'คน',
+
+ flow:'หลังส่งคำขอ Admin จะตอบภายใน {a} นาที ถ้าตอบ "ได้" ต้องชำระเงินและแนบสลิปภายใน {p} นาที',
+
+ e_slot:'ช่วงเวลานี้ถูกจองแล้ว กรุณาเลือกใหม่',e_active:'มีคำขอที่ยังไม่เสร็จครบ {n} รายการแล้ว',e_time:'เวลานี้จองไม่ได้',
+
+ nobk:'ยังไม่มีการจอง',code:'รหัสการจอง',status:'สถานะ',left:'เหลือเวลา',by:'ผู้จอง',
+
+ s_pending:'รอ Admin ตอบ',s_awaitPay:'รอชำระเงิน',s_verifying:'รอตรวจสลิป',s_confirmed:'สำเร็จ',s_declined:'ไม่ได้',s_expired:'หมดเวลา',s_cancelled:'ยกเลิกแล้ว',s_completed:'เสร็จสิ้น',
+
+ t1:'ส่งคำขอ',t2:'Admin ตอบ "ได้"',t3:'ชำระเงิน + แนบสลิป',t4:'ตรวจสลิป',t5:'สำเร็จ',
+
+ pay:'ชำระเงิน',scan:'สแกน QR พร้อมเพย์ แล้วแนบสลิป',noqr:'ใส่เบอร์พร้อมเพย์ที่ CFG.promptpay เพื่อแสดง QR',attach:'แนบสลิป',submitSlip:'ส่งสลิป',e_slip:'กรุณาแนบรูปสลิป',
+
+ cancel:'ยกเลิกการจอง',cancelQ:'ยืนยันยกเลิกการจองนี้?',paidNoCancel:'จ่ายเงินแล้ว หากต้องการยกเลิกกรุณาติดต่อร้าน',
+
+ bad_slip:'สลิปไม่ถูกต้อง กรุณาแนบใหม่ (เหลือ {n} ครั้ง)',
+
+ okTitle:'สำเร็จ / Confirmed',print:'พิมพ์ใบยืนยัน',paidOk:'ตรวจสลิปแล้ว',
+
+ pending:'รอตอบ',slips:'รอตรวจสลิป',hist:'ประวัติทั้งหมด',yes:'ได้',no:'ไม่ได้',okSlip:'ยืนยันยอด',badSlip:'สลิปไม่ถูกต้อง',
+
+ search:'ค้นหา รหัส/ชื่อผู้ใช้',all:'ทั้งหมด',empty:'ไม่มีรายการ',reqAt:'ส่งคำขอ',waitLong:'รอนานแล้ว',expect:'ยอดที่ต้องได้รับ',who:'ผู้ดำเนินการ',
+
+ pkgName:'แพ็ก {h} ชม.',back2:'กลับ',refresh:'หน้านี้รีเฟรชอัตโนมัติ'
+
+},en:{
+
+ login:'Login',register:'Sign up',logout:'Logout',user:'Username',pass:'Password',pass2:'Confirm password',dname:'Display name',email:'Email',
+
+ noacc:'No account?',haveacc:'Already a member?',age:'I am 20 years old or older',pdpa:'I accept personal data collection (PDPA)',
+
+ demo:'Demo mode: data is stored in this browser (Admin: admin / admin1234)',
+
+ e_login:'Wrong username or password',e_user:'Username: a-z 0-9 _ . - only (3-20 chars)',e_pass:'Password must be at least 6 characters',e_match:'Passwords do not match',e_dup:'Username already taken',e_chk:'Please tick age and PDPA boxes',e_mail:'Invalid email',
+
+ book:'Book a table',mine:'My bookings',hello:'Hello',date:'Date',pkg:'Package',hr:'hr',start:'Start time',cards:'Cards',grid:'Timetable',
+
+ seats:'seats',guests:'Guests',max:'max',select:'Select this table',free:'Free',pend:'Pending',full:'Booked',na:'Unavailable',
+
+ lgF:'Free',lgP:'Pending',lgX:'Booked',lgN:'Not bookable (too soon / after closing)',tapHint:'Tap a "free" cell to choose table and start time',
+
+ noslot:'Not bookable (book at least {m} min ahead and finish before closing)',openinfo:'Open {o} - {c}',
+
+ confirm:'Confirm booking request',back:'Back',send:'Send request',table:'Table',time:'Time',amount:'Amount',baht:'THB',people:'guests',
+
+ flow:'Admin will reply within {a} min. If approved, pay and upload the slip within {p} min.',
+
+ e_slot:'This slot has just been taken. Please choose again.',e_active:'You already have {n} open requests',e_time:'This time is not bookable',
+
+ nobk:'No bookings yet',code:'Booking code',status:'Status',left:'Time left',by:'Booked by',
+
+ s_pending:'Waiting for admin',s_awaitPay:'Awaiting payment',s_verifying:'Verifying slip',s_confirmed:'Confirmed',s_declined:'Declined',s_expired:'Expired',s_cancelled:'Cancelled',s_completed:'Completed',
+
+ t1:'Request sent',t2:'Admin approved',t3:'Pay + slip',t4:'Slip check',t5:'Confirmed',
+
+ pay:'Payment',scan:'Scan the PromptPay QR, then upload the slip',noqr:'Set CFG.promptpay to show the QR',attach:'Upload slip',submitSlip:'Submit slip',e_slip:'Please attach a slip image',
+
+ cancel:'Cancel booking',cancelQ:'Cancel this booking?',paidNoCancel:'Paid already. Please contact the shop to cancel.',
+
+ bad_slip:'Slip rejected. Please upload again ({n} tries left)',
+
+ okTitle:'Confirmed / สำเร็จ',print:'Print confirmation',paidOk:'Slip verified',
+
+ pending:'To answer',slips:'Slip check',hist:'History',yes:'Approve',no:'Decline',okSlip:'Confirm payment',badSlip:'Invalid slip',
+
+ search:'Search code/username',all:'All',empty:'Nothing here',reqAt:'Requested',waitLong:'Waiting long',expect:'Expected amount',who:'Handled by',
+
+ pkgName:'{h}-hr package',back2:'Back',refresh:'Auto-refreshing'
+
+}};
+
+/* ===== ตัวช่วย ===== */
+
+var S={lang:localStorage.getItem('upev_lang')||'th',user:null,view:'login',tab:'pending',mode:'cards',draft:null,cur:null,err:'',slipTmp:null,filt:{st:'',q:''}};
+
+function t(k,v){var s=(T[S.lang][k]!==undefined?T[S.lang][k]:k);if(v)for(var a in v)s=s.replace('{'+a+'}',v[a]);return s}
+
+function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+function pad(n){return n<10?'0'+n:''+n}
+
+function fd(ts){return new Date(ts).toLocaleDateString(S.lang==='th'?'th-TH-u-ca-buddhist':'en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'})}
+
+function ft(ts){var d=new Date(ts);return pad(d.getHours())+':'+pad(d.getMinutes())}
+
+function hh(h){return pad(h%24)+':00'}
+
+function money(n){return Number(n).toLocaleString('en-US')}
+
+function dstr(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+
+function tsOf(ds,h){var p=ds.split('-');return new Date(+p[0],+p[1]-1,+p[2],h,0,0).getTime()}
+
+function tbl(id){return CFG.tables.filter(function(x){return x.id===id})[0]}
+
+function tname(id){var x=tbl(id);return x?(S.lang==='th'?x.name:x.en):id}
+
+function mmss(ms){if(ms<0)ms=0;var s=Math.floor(ms/1000);return pad(Math.floor(s/60))+':'+pad(s%60)}
+
+/* ===== ฐานข้อมูล (localStorage) ===== */
+
+function load(){try{return JSON.parse(localStorage.getItem('upev_db'))||{users:[],bookings:[],seq:0}}catch(e){return{users:[],bookings:[],seq:0}}}
+
+function save(db){localStorage.setItem('upev_db',JSON.stringify(db))}
+
+function hashPw(pw,salt){
+
+  var data=new TextEncoder().encode(salt+':'+pw);
+
+  if(window.crypto&&crypto.subtle){return crypto.subtle.digest('SHA-256',data).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return pad(x.toString(16)).slice(-2)}).join('')})}
+
+  var h=5381;for(var i=0;i<data.length;i++)h=((h<<5)+h+data[i])|0;return Promise.resolve('f'+h)
+
+}
+
+function seed(){var db=load();if(!db.users.some(function(u){return u.username==='admin'})){
+
+  var salt='s'+Math.random().toString(36).slice(2);
+
+  return hashPw('admin1234',salt).then(function(h){db.users.push({username:'admin',name:'Admin',email:'',role:'admin',salt:salt,hash:h});save(db)})}
+
+  return Promise.resolve()}
+
+var ACTIVE=['pending','awaitPay','verifying'];
+
+function sweep(){var db=load(),now=Date.now(),ch=false;
+
+  db.bookings.forEach(function(b){
+
+    if((b.status==='pending'||b.status==='awaitPay')&&now>b.deadline){b.status='expired';ch=true;b.log.push({t:now,by:'system',a:'expired'})}
+
+    else if(b.status==='confirmed'&&now>b.end){b.status='completed';ch=true}
+
+  });if(ch)save(db);return db}
+
+function stateOf(tid,s,e,db){var r='f';db.bookings.forEach(function(b){
+
+  if(b.table!==tid)return;
+
+  if(!(ACTIVE.indexOf(b.status)>-1||b.status==='confirmed'))return;
+
+  if(b.start<e+CFG.buffer*60000&&s<b.end+CFG.buffer*60000){if(b.status==='confirmed')r='x';else if(r!=='x')r='p'}});return r}
+
+function validStart(ds,h,hrs){return tsOf(ds,h)>=Date.now()+CFG.lead*60000&&h+hrs<=CFG.close}
+
+/* ===== Render ===== */
+
+var app=document.getElementById('app');
+
+function head(){
+
+  var l='<div class="lang" onclick="A.lang()"><span class="'+(S.lang==='th'?'on':'')+'">TH</span><span class="'+(S.lang==='en'?'on':'')+'">EN</span></div>';
+
+  var r=l;if(S.user)r+='<button class="link" onclick="A.logout()">'+t('logout')+'</button>';
+
+  return '<div class="top"><div class="logo"><b>UP</b><span class="ar">▲</span>EVERYDAY'+(S.user&&S.user.role==='admin'?'<span class="tag">ADMIN</span>':'')+'</div><div class="right">'+r+'</div></div>'}
+
+function nav(){return '<div class="nav"><button class="'+(S.view==='book'||S.view==='confirm'?'on':'')+'" onclick="A.go(\'book\')">'+t('book')+'</button><button class="'+(S.view==='mine'||S.view==='detail'?'on':'')+'" onclick="A.go(\'mine\')">'+t('mine')+'</button></div>'}
+
+function errBox(){var e=S.err;S.err='';return e?'<div class="err">'+esc(e)+'</div>':''}
+
+function render(){
+
+  app.className=(S.user&&S.user.role==='admin')?'wide':'';
+
+  var h=head(),b='';
+
+  if(!S.user){b=S.view==='register'?vRegister():vLogin()}
+
+  else if(S.user.role==='admin'){b=vAdmin()}
+
+  else if(S.view==='confirm'){b=nav()+vConfirm()}
+
+  else if(S.view==='mine'){b=nav()+vMine()}
+
+  else if(S.view==='detail'){b=nav()+vDetail()}
+
+  else{b=nav()+vBook()}
+
+  app.innerHTML=h+b;tick()}
+
+function vLogin(){return '<div class="hero"><div class="logo"><b>UP</b><span class="ar">▲</span>EVERYDAY</div></div>'+errBox()+
+
+ '<div class="card"><label>'+t('user')+'</label><input id="lu" autocomplete="username"><label>'+t('pass')+'</label><input id="lp" type="password" autocomplete="current-password"><label class="chk" style="margin:8px 0 0;color:var(--muted)"><input type="checkbox" onchange="document.getElementById(\'lp\').type=this.checked?\'text\':\'password\'">'+(S.lang==='th'?'แสดงรหัสผ่าน':'Show password')+'</label>'+
+
+ '<button class="btn" onclick="A.doLogin()">'+t('login')+'</button></div><p class="muted" style="text-align:center">'+t('noacc')+' <button class="link" onclick="A.go(\'register\')">'+t('register')+'</button></p><p class="muted" style="text-align:center;margin-top:14px">'+t('demo')+'</p>'}
+
+function vRegister(){return '<h2>'+t('register')+'</h2>'+errBox()+'<div class="card"><label>'+t('user')+'</label><input id="ru" autocomplete="username"><label>'+t('dname')+'</label><input id="rn"><label>'+t('email')+'</label><input id="re" type="email"><label>'+t('pass')+'</label><input id="rp" type="password" autocomplete="new-password"><label>'+t('pass2')+'</label><input id="rq" type="password">'+
+
+ '<label class="chk"><input type="checkbox" id="ra">'+t('age')+'</label><label class="chk"><input type="checkbox" id="rd">'+t('pdpa')+'</label><button class="btn" onclick="A.doReg()">'+t('register')+'</button></div><p class="muted" style="text-align:center">'+t('haveacc')+' <button class="link" onclick="A.go(\'login\')">'+t('login')+'</button></p>'}
+
+function vBook(){
+
+  var db=sweep(),d=S.draft;
+
+  if(!d){var today=new Date(),ds=dstr(today),hrs=2,st=null;
+
+    for(var i=0;i<=CFG.days&&st===null;i++){var dd=new Date(today.getFullYear(),today.getMonth(),today.getDate()+i);for(var h=CFG.open;h<CFG.close;h++){if(validStart(dstr(dd),h,hrs)){st=h;ds=dstr(dd);break}}}
+
+    d=S.draft={date:ds,hrs:hrs,start:st===null?CFG.open:st,guests:{}}}
+
+  var now=new Date(),dopt='';
+
+  for(var i=0;i<=CFG.days;i++){var x=new Date(now.getFullYear(),now.getMonth(),now.getDate()+i);dopt+='<option value="'+dstr(x)+'"'+(dstr(x)===d.date?' selected':'')+'>'+esc(fd(x.getTime()))+'</option>'}
+
+  var popt=CFG.pkgs.map(function(p){return '<option value="'+p+'"'+(p===d.hrs?' selected':'')+'>'+t('pkgName',{h:p})+'</option>'}).join('');
+
+  var sopt='';for(var h=CFG.open;h<CFG.close;h++)sopt+='<option value="'+h+'"'+(h===d.start?' selected':'')+'>'+hh(h)+'</option>';
+
+  var o='<p class="muted" style="margin-bottom:8px">'+(S.user.name?t('hello')+', '+esc(S.user.name)+' · ':'')+t('openinfo',{o:hh(CFG.open),c:hh(CFG.close)})+'</p>'+errBox()+
+
+   '<div class="card"><div class="row"><div><label>'+t('date')+'</label><select onchange="A.set(\'date\',this.value)">'+dopt+'</select></div><div><label>'+t('pkg')+'</label><select onchange="A.set(\'hrs\',+this.value)">'+popt+'</select></div></div>'+
+
+   (S.mode==='cards'?'<label>'+t('start')+'</label><select onchange="A.set(\'start\',+this.value)">'+sopt+'</select>':'')+'</div>'+
+
+   '<div class="tabs"><button class="'+(S.mode==='cards'?'on':'')+'" onclick="A.mode(\'cards\')">'+t('cards')+'</button><button class="'+(S.mode==='grid'?'on':'')+'" onclick="A.mode(\'grid\')">'+t('grid')+'</button></div>';
+
+  if(S.mode==='cards'){
+
+    var ok=validStart(d.date,d.start,d.hrs),s=tsOf(d.date,d.start),e=s+d.hrs*3600000;
+
+    if(!ok)o+='<div class="info">'+t('noslot',{m:CFG.lead})+'</div>';
+
+    CFG.tables.forEach(function(tb){
+
+      var st=ok?stateOf(tb.id,s,e,db):'n',g=d.guests[tb.id]||tb.cap>2?(d.guests[tb.id]||Math.min(2,tb.cap)):tb.cap;
+
+      var bd=st==='f'?'<span class="badge ok">✓ '+t('free')+'</span>':st==='p'?'<span class="badge wait">~ '+t('pend')+'</span>':st==='x'?'<span class="badge bad">✕ '+t('full')+'</span>':'<span class="badge mut">'+t('na')+'</span>';
+
+      var go='';for(var i=1;i<=tb.cap;i++)go+='<option value="'+i+'"'+(i===g?' selected':'')+'>'+i+'</option>';
+
+      o+='<div class="card'+(st==='f'?'':' off')+'"><div class="card-h"><div><b>'+esc(tname(tb.id))+'</b><small>'+tb.cap+' '+t('seats')+' · ฿'+tb.rate+'/'+t('hr')+'</small></div>'+bd+'</div>'+
+
+        '<div class="price"><span>'+t('pkgName',{h:d.hrs})+' ('+hh(d.start)+' - '+hh(d.start+d.hrs)+')</span><b>฿'+money(tb.rate*d.hrs)+'</b></div>'+
+
+        (st==='f'?'<label>'+t('guests')+' ('+t('max')+' '+tb.cap+')</label><select id="g_'+tb.id+'">'+go+'</select><button class="btn" onclick="A.pick(\''+tb.id+'\','+d.start+')">'+t('select')+'</button>':'<button class="btn dis" disabled>'+t('na')+'</button>')+'</div>'})
+
+  }else{
+
+    o+='<div class="scroll"><table class="tt"><tr><th></th>';
+
+    for(var h=CFG.open;h<CFG.close;h++)o+='<th>'+pad(h%24)+'</th>';o+='</tr>';
+
+    CFG.tables.forEach(function(tb){o+='<tr><th>'+esc(tname(tb.id))+'</th>';
+
+      for(var h=CFG.open;h<CFG.close;h++){
+
+        if(!validStart(d.date,h,d.hrs)){o+='<td class="n">–</td>';continue}
+
+        var s=tsOf(d.date,h),st=stateOf(tb.id,s,s+d.hrs*3600000,db);
+
+        if(st==='f')o+='<td class="f" onclick="A.pickGrid(\''+tb.id+'\','+h+')">✓</td>';else if(st==='p')o+='<td class="p">~</td>';else o+='<td class="x">✕</td>'}
+
+      o+='</tr>'});
+
+    o+='</table></div><div class="legend"><span class="ok">✓ '+t('lgF')+'</span><span class="wait">~ '+t('lgP')+'</span><span class="bad">✕ '+t('lgX')+'</span><span>– '+t('lgN')+'</span></div><p class="muted">'+t('tapHint')+' ('+t('pkgName',{h:d.hrs})+')</p>'}
+
+  return o}
+
+function vConfirm(){var d=S.draft,tb=tbl(d.tableId),s=tsOf(d.date,d.start);
+
+  return '<h2>'+t('confirm')+'</h2>'+errBox()+'<div class="card">'+
+
+  kv(t('table'),tname(tb.id))+kv(t('date'),fd(s))+kv(t('time'),hh(d.start)+' - '+hh(d.start+d.hrs)+' ('+t('pkgName',{h:d.hrs})+')')+kv(t('guests'),d.g+' '+t('people'))+kv(t('amount'),'฿'+money(tb.rate*d.hrs))+'</div>'+
+
+  '<div class="info">'+t('flow',{a:CFG.adminWait,p:CFG.payWait})+'</div><div class="two"><button class="btn gh" onclick="A.go(\'book\')">'+t('back')+'</button><button class="btn" onclick="A.submit()">'+t('send')+'</button></div>'}
+
+function kv(a,b){return '<div class="kv"><span>'+esc(a)+'</span><span>'+esc(b)+'</span></div>'}
+
+function sCls(s){return s==='confirmed'||s==='completed'?'ok':(s==='declined'||s==='expired'||s==='cancelled')?'bad':'wait'}
+
+function badge(b){return '<span class="badge '+sCls(b.status)+'">'+t('s_'+b.status)+'</span>'}
+
+function dl(b){return (b.status==='pending'||b.status==='awaitPay')?'<span class="timer" data-dl="'+b.deadline+'"></span>':''}
+
+function vMine(){var db=sweep(),l=db.bookings.filter(function(b){return b.user===S.user.username}).sort(function(a,b){return b.created-a.created});
+
+  if(!l.length)return '<p class="muted">'+t('nobk')+'</p>';
+
+  return l.map(function(b){return '<div class="card" onclick="A.open(\''+b.id+'\')" style="cursor:pointer"><div class="card-h"><div><b>'+esc(b.code)+' · '+esc(tname(b.table))+'</b><small>'+esc(fd(b.start))+' '+hh(new Date(b.start).getHours())+' - '+ft(b.end)+'</small></div>'+badge(b)+'</div><div class="price"><span>'+b.guests+' '+t('people')+' '+dl(b)+'</span><b>฿'+money(b.price)+'</b></div></div>'}).join('')+'<p class="muted">'+t('refresh')+'</p>'}
+
+function vDetail(){var db=sweep(),b=db.bookings.filter(function(x){return x.id===S.cur})[0];if(!b)return '<p class="muted">'+t('nobk')+'</p>';
+
+  var idx={pending:1,awaitPay:2,verifying:3,confirmed:5,completed:5}[b.status];
+
+  var steps=['t1','t2','t3','t4','t5'],tr='';
+
+  if(idx)tr='<ul class="trk">'+steps.map(function(k,i){return '<li class="'+(i<idx-1||idx===5?'done':i===idx-1?'now':'')+'">'+t(k)+'</li>'}).join('')+'</ul>';
+
+  var o=errBox()+'<div class="card hl"><div class="card-h"><div><b>'+esc(b.code)+'</b><small>'+esc(tname(b.table))+'</small></div>'+badge(b)+'</div>'+(dl(b)?'<p>'+t('left')+': '+dl(b)+'</p>':'')+tr+
+
+   kv(t('date'),fd(b.start))+kv(t('time'),ft(b.start)+' - '+ft(b.end))+kv(t('guests'),b.guests+' '+t('people'))+kv(t('amount'),'฿'+money(b.price))+'</div>';
+
+  if(b.note)o+='<div class="info">'+esc(b.note)+'</div>';
+
+  if(b.status==='awaitPay'){
+
+    var qr=CFG.promptpay?'<img src="https://promptpay.io/'+encodeURIComponent(CFG.promptpay)+'/'+b.price+'.png" alt="PromptPay QR">':'<div class="qrph">'+t('noqr')+'</div>';
+
+    o+='<div class="card"><b>'+t('pay')+' ฿'+money(b.price)+'</b><p class="muted">'+t('scan')+'</p><div class="qr">'+qr+'</div><label>'+t('attach')+'</label><input type="file" accept="image/*" onchange="A.slipPick(this)">'+(S.slipTmp?'<img class="slip" src="'+S.slipTmp+'" alt="slip">':'')+'<button class="btn" onclick="A.slipSend(\''+b.id+'\')">'+t('submitSlip')+'</button></div>'}
+
+  if(b.status==='verifying')o+='<div class="card"><p class="muted">'+t('s_verifying')+'</p>'+(b.slip?'<img class="slip" src="'+b.slip+'" alt="slip">':'')+'<p class="muted">'+t('paidNoCancel')+'</p></div>';
+
+  if(b.status==='confirmed'||b.status==='completed')o+=ticket(b)+'<p class="muted noprint" style="margin-top:8px">'+t('paidNoCancel')+'</p>';
+
+  if(b.status==='pending'||b.status==='awaitPay')o+='<button class="btn rd" onclick="A.cancel(\''+b.id+'\')">'+t('cancel')+'</button>';
+
+  return o+'<button class="btn gh" onclick="A.go(\'mine\')">'+t('back2')+'</button>'}
+
+function ticket(b){return '<div class="pr"><div class="ticket"><div style="font-weight:700;font-size:18px">'+t('okTitle')+'</div><div class="muted" style="color:#555">'+t('code')+'</div><div class="code">'+esc(b.code)+'</div>'+
+
+  kv('',CFG.shop).replace('<span></span>','<span>'+(S.lang==='th'?'ร้าน':'Shop')+'</span>')+kv(t('by'),b.user)+kv(t('table'),tname(b.table)+' ('+b.guests+' '+t('people')+')')+kv(t('date'),fd(b.start))+kv(t('time'),ft(b.start)+' - '+ft(b.end)+' ('+t('pkgName',{h:b.hrs})+')')+kv(t('amount'),'฿'+money(b.price)+' ('+t('paidOk')+')')+
+
+  (CFG.terms?'<p style="font-size:12px;margin-top:10px;color:#555">'+esc(CFG.terms)+'</p>':'')+'<button class="btn noprint" onclick="window.print()">'+t('print')+'</button></div></div>'}
+
+/* ===== Admin ===== */
+
+function vAdmin(){var db=sweep(),all=db.bookings.slice().sort(function(a,b){return b.created-a.created});
+
+  var p=all.filter(function(b){return b.status==='pending'}),s=all.filter(function(b){return b.status==='verifying'});
+
+  var o=errBox()+'<div class="tabs"><button class="'+(S.tab==='pending'?'on':'')+'" onclick="A.tab(\'pending\')">'+t('pending')+' ('+p.length+')</button><button class="'+(S.tab==='slips'?'on':'')+'" onclick="A.tab(\'slips\')">'+t('slips')+' ('+s.length+')</button><button class="'+(S.tab==='hist'?'on':'')+'" onclick="A.tab(\'hist\')">'+t('hist')+'</button></div>';
+
+  function info(b){return '<div class="card-h"><div><b>'+esc(b.code)+' · '+esc(b.user)+'</b><small>'+esc(tname(b.table))+' · '+b.guests+'/'+tbl(b.table).cap+' '+t('people')+'</small></div>'+badge(b)+'</div>'+kv(t('date'),fd(b.start))+kv(t('time'),ft(b.start)+' - '+ft(b.end)+' ('+t('pkgName',{h:b.hrs})+')')+kv(t('amount'),'฿'+money(b.price))+kv(t('reqAt'),ft(b.created))}
+
+  if(S.tab==='pending'){o+=p.length?p.map(function(b){return '<div class="card">'+info(b)+'<p class="muted" style="margin-top:6px">'+t('left')+': '+dl(b)+'</p><div class="two"><button class="btn" onclick="A.adm(\''+b.id+'\',\'yes\')">'+t('yes')+'</button><button class="btn rd" onclick="A.adm(\''+b.id+'\',\'no\')">'+t('no')+'</button></div></div>'}).join(''):'<p class="muted">'+t('empty')+'</p>'}
+
+  if(S.tab==='slips'){o+=s.length?s.map(function(b){var long=Date.now()-(b.slipAt||0)>30*60000;return '<div class="card">'+info(b)+'<p class="acc" style="margin-top:6px">'+t('expect')+': ฿'+money(b.price)+(long?' · <span class="bad">'+t('waitLong')+'</span>':'')+'</p>'+(b.slip?'<img class="slip" src="'+b.slip+'" alt="slip">':'')+'<div class="two"><button class="btn" onclick="A.adm(\''+b.id+'\',\'okslip\')">'+t('okSlip')+'</button><button class="btn rd" onclick="A.adm(\''+b.id+'\',\'badslip\')">'+t('badSlip')+'</button></div></div>'}).join(''):'<p class="muted">'+t('empty')+'</p>'}
+
+  if(S.tab==='hist'){var sts=['pending','awaitPay','verifying','confirmed','declined','expired','cancelled','completed'];
+
+    o+='<div class="row"><div><label>'+t('search')+'</label><input value="'+esc(S.filt.q)+'" onchange="S.filt.q=this.value;render()"></div><div><label>'+t('status')+'</label><select onchange="S.filt.st=this.value;render()"><option value="">'+t('all')+'</option>'+sts.map(function(x){return '<option value="'+x+'"'+(S.filt.st===x?' selected':'')+'>'+t('s_'+x)+'</option>'}).join('')+'</select></div></div><div style="height:10px"></div>';
+
+    var q=S.filt.q.toLowerCase(),l=all.filter(function(b){return(!S.filt.st||b.status===S.filt.st)&&(!q||b.code.toLowerCase().indexOf(q)>-1||b.user.toLowerCase().indexOf(q)>-1)});
+
+    o+=l.length?l.map(function(b){var lg=b.log.map(function(x){return ft(x.t)+' '+esc(x.by)+': '+esc(x.a)}).join(' | ');return '<div class="card">'+info(b)+'<p class="muted" style="margin-top:6px">'+t('who')+': '+(lg||'-')+'</p></div>'}).join(''):'<p class="muted">'+t('empty')+'</p>'}
+
+  return o}
+
+/* ===== Actions ===== */
+
+var A={
+
+ lang:function(){S.lang=S.lang==='th'?'en':'th';localStorage.setItem('upev_lang',S.lang);document.documentElement.lang=S.lang;render()},
+
+ go:function(v){S.view=v;S.err='';S.slipTmp=null;render()},
+
+ mode:function(m){S.mode=m;render()},tab:function(x){S.tab=x;render()},
+
+ set:function(k,v){S.draft[k]=v;if(k==='date'||k==='hrs'){S.draft.start=S.draft.start}render()},
+
+ logout:function(){sessionStorage.removeItem('upev_user');S.user=null;S.view='login';S.draft=null;render()},
+
+ doLogin:function(){var u=document.getElementById('lu').value.trim().toLowerCase(),p=document.getElementById('lp').value,db=load(),x=db.users.filter(function(y){return y.username===u})[0];
+
+  if(!x){S.err=t('e_login');return render()}
+
+  hashPw(p,x.salt).then(function(h){if(h!==x.hash){S.err=t('e_login');return render()}
+
+   sessionStorage.setItem('upev_user',x.username);S.user=x;S.view=x.role==='admin'?'admin':'book';render()})},
+
+ doReg:function(){var g=function(i){return document.getElementById(i)},u=g('ru').value.trim().toLowerCase(),n=g('rn').value.trim(),e=g('re').value.trim(),p=g('rp').value,q=g('rq').value,db=load();
+
+  var er='';if(!/^[a-z0-9_.-]{3,20}$/.test(u))er=t('e_user');else if(p.length<6)er=t('e_pass');else if(p!==q)er=t('e_match');else if(e&&!/^\S+@\S+\.\S+$/.test(e))er=t('e_mail');else if(!g('ra').checked||!g('rd').checked)er=t('e_chk');else if(db.users.some(function(x){return x.username===u}))er=t('e_dup');
+
+  if(er){S.err=er;return render()}
+
+  var salt='s'+Math.random().toString(36).slice(2);
+
+  hashPw(p,salt).then(function(h){var d=load();d.users.push({username:u,name:n||u,email:e,role:'customer',salt:salt,hash:h});save(d);var x=d.users[d.users.length-1];sessionStorage.setItem('upev_user',u);S.user=x;S.view='book';render()})},
+
+ pick:function(id,h){var tb=tbl(id),sel=document.getElementById('g_'+id);S.draft.tableId=id;S.draft.g=+sel.value;S.draft.start=h;S.view='confirm';render()},
+
+ pickGrid:function(id,h){S.draft.tableId=id;S.draft.start=h;S.draft.g=Math.min(2,tbl(id).cap);S.view='confirm';render()},
+
+ submit:function(){var db=sweep(),d=S.draft,tb=tbl(d.tableId),s=tsOf(d.date,d.start),e=s+d.hrs*3600000;
+
+  if(!validStart(d.date,d.start,d.hrs)){S.err=t('e_time');return render()}
+
+  var n=db.bookings.filter(function(b){return b.user===S.user.username&&ACTIVE.indexOf(b.status)>-1}).length;
+
+  if(n>=CFG.maxActive){S.err=t('e_active',{n:CFG.maxActive});return render()}
+
+  if(stateOf(d.tableId,s,e,db)!=='f'){S.err=t('e_slot');S.view='book';return render()}
+
+  db.seq++;var b={id:'b'+Date.now(),code:'UP-'+('0000'+db.seq).slice(-4),user:S.user.username,table:tb.id,start:s,end:e,hrs:d.hrs,guests:d.g,price:tb.rate*d.hrs,status:'pending',created:Date.now(),deadline:Date.now()+CFG.adminWait*60000,slipCount:0,slip:null,note:'',log:[]};
+
+  db.bookings.push(b);save(db);S.cur=b.id;S.view='detail';render()},
+
+ open:function(id){S.cur=id;S.view='detail';S.slipTmp=null;render()},
+
+ cancel:function(id){if(!confirm(t('cancelQ')))return;var db=load(),b=db.bookings.filter(function(x){return x.id===id})[0];
+
+  if(b&&(b.status==='pending'||b.status==='awaitPay')){b.status='cancelled';b.log.push({t:Date.now(),by:b.user,a:'cancel'});save(db)}render()},
+
+ slipPick:function(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var m=800,k=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);S.slipTmp=c.toDataURL('image/jpeg',.7);render()};im.src=r.result};r.readAsDataURL(f)},
+
+ slipSend:function(id){if(!S.slipTmp){S.err=t('e_slip');return render()}var db=sweep(),b=db.bookings.filter(function(x){return x.id===id})[0];
+
+  if(b&&b.status==='awaitPay'){b.status='verifying';b.slip=S.slipTmp;b.slipAt=Date.now();b.slipCount++;b.note='';b.log.push({t:Date.now(),by:b.user,a:'slip'});save(db)}S.slipTmp=null;render()},
+
+ adm:function(id,a){var db=sweep(),b=db.bookings.filter(function(x){return x.id===id})[0],now=Date.now();if(!b)return render();
+
+  var me=S.user.username;
+
+  if(b.status==='pending'){
+
+    if(a==='yes'){b.status='awaitPay';b.deadline=now+CFG.payWait*60000;b.log.push({t:now,by:me,a:'approve'})}
+
+    if(a==='no'){b.status='declined';b.log.push({t:now,by:me,a:'decline'})}}
+
+  else if(b.status==='verifying'){
+
+    if(a==='okslip'){b.status='confirmed';b.log.push({t:now,by:me,a:'slip ok'})}
+
+    if(a==='badslip'){b.log.push({t:now,by:me,a:'slip bad'});
+
+      if(b.slipCount<CFG.reslip){b.status='awaitPay';b.deadline=now+CFG.reslipWait*60000;b.slip=null;b.note=t('bad_slip',{n:CFG.reslip-b.slipCount})}
+
+      else{b.status='declined'}}}
+
+  save(db);render()}
+
+};
+
+/* ===== ตัวนับเวลา + รีเฟรช ===== */
+
+function tick(){var now=Date.now();document.querySelectorAll('[data-dl]').forEach(function(el){el.textContent=mmss(+el.getAttribute('data-dl')-now)})}
+
+setInterval(tick,1000);
+
+setInterval(function(){if(!S.user)return;var v=S.view,ae=document.activeElement;if(ae&&(ae.tagName==='INPUT'||ae.tagName==='SELECT'))return;if(v==='mine'||v==='detail'||S.user.role==='admin'){var before=JSON.stringify(load().bookings.map(function(b){return b.status}));sweep();render()}},15000);
+
+window.addEventListener('storage',function(){if(S.user&&!(document.activeElement&&document.activeElement.tagName==='INPUT'))render()});
+
+/* ===== เริ่มต้น ===== */
+
+seed().then(function(){var u=sessionStorage.getItem('upev_user');
+
+  if(u){S.user=load().users.filter(function(x){return x.username===u})[0]||null}
+
+  if(S.user)S.view=S.user.role==='admin'?'admin':'book';
+
+  document.documentElement.lang=S.lang;render()});
+
+</script>
+
+</body>
+
+</html>
